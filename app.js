@@ -1,3 +1,4 @@
+/* Menu Section  */
 const menu = [
   {
     id: 1,
@@ -81,3 +82,99 @@ const menu = [
     desc: `Red bean paste dessert, serving with honey.`,
   },
 ];
+
+/* Document Section  */
+
+const section = document.querySelector(".section-center");
+const buttons = document.querySelector(".btn-container");
+
+const categories = menu.reduce(
+  (values, item) => {
+    if (!values.includes(item.category)) {
+      values.push(item.category);
+    }
+    return values;
+  },
+  ["All"]
+)
+const createButtons = categories.map((category) => {
+      return `<button class="btn btn-outline-dark btn-item" data-id=${category}>${category}</button>`
+    }).join("");
+
+buttons.innerHTML = createButtons
+const filterBtns = document.querySelectorAll(".btn-item")
+
+function findCategorie () {
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const category = e.currentTarget.dataset.id;
+      console.log("Tipi",typeof(category))
+      isKorea()
+      if(category.id === "Korea"){
+        console.log(category);
+        isKorea()
+      }
+      return isKorea()
+  
+      if(category.values === "Japan"){
+        console.log(category);
+        isJapan()
+      }
+      return isJapan()
+  
+      if(category.values === "China"){
+        console.log(category);
+        isChina()
+      }
+      return isChina()
+      console.log(category);
+    }
+    )
+  }
+  )
+}
+
+console.log("Find Categorie Section",findCategorie());
+
+/* Functions Section */
+
+function isKorea(){
+  let fitlerCategorieKorea = menu.filter(menus => menus.category === "Korea")
+  return fitlerCategorieKorea
+}
+function isJapan(){
+  let fitlerCategorieJapan = menu.filter(menus => menus.category === "Japan")
+  return fitlerCategorieJapan
+}
+function isChina(){
+  let fitlerCategorieChina = menu.filter(menus => menus.category === "China")
+  return fitlerCategorieChina
+}
+function isAll(){
+  return menu
+}
+
+
+
+console.log(isKorea())
+console.log(isJapan())
+console.log(isChina())
+console.log(isAll())
+
+/* let fitlerCategorie = menu.filter(menus => menus.category === "Korea")
+console.log(fitlerCategorie) */
+
+/* let section_categorie =  menu.map(food =>{
+  if(food.category === "Korea"){
+    filterBtns.add
+    return "Korea"
+  }
+  if(food.category === "Japan"){
+    return "Japan"
+  }
+  if(food.category === "China"){
+    return "China"
+  }
+  return console.log("Bir hata var")
+})
+console.log(section_categorie) */
