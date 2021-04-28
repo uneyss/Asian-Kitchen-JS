@@ -97,84 +97,68 @@ const categories = menu.reduce(
   },
   ["All"]
 )
+
+
+// Button Create 
 const createButtons = categories.map((category) => {
-      return `<button class="btn btn-outline-dark btn-item" data-id=${category}>${category}</button>`
+      return `<button class="btn btn-outline-dark btn-item" id=${category}>${category}</button>`
     }).join("");
 
 buttons.innerHTML = createButtons
 const filterBtns = document.querySelectorAll(".btn-item")
 
-function findCategorie () {
+
+// Filter
+function filterSection (){
   filterBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      const category = e.currentTarget.dataset.id;
-      console.log("Tipi",typeof(category))
-      isKorea()
-      if(category.id === "Korea"){
-        console.log(category);
-        isKorea()
+      const category = e.currentTarget.id
+      console.log(country(category),category)
+      if(country(category) === "All"){
+        return menuList(menu)
+      }else{
+        return menuList(country(category))
       }
-      return isKorea()
-  
-      if(category.values === "Japan"){
-        console.log(category);
-        isJapan()
-      }
-      return isJapan()
-  
-      if(category.values === "China"){
-        console.log(category);
-        isChina()
-      }
-      return isChina()
-      console.log(category);
-    }
-    )
-  }
-  )
+      
+    })
+  })
+} 
+
+
+
+// Menu
+const menuList = (menuItems) => {
+  let displayMenu = menuItems.map((item) => {
+   
+    return `<div class="menu-items col-lg-6 col-sm-12">
+            <img
+              src=${item.img}
+              alt=${item.title}
+              class="photo"
+            />
+            <div class="menu-info">
+              <div class="menu-title">
+                <h4>${item.title}</h4>
+                <h4 class="price">${item.price}</h4>
+              </div>
+              <div class="menu-text">
+                ${item.desc}
+              </div>
+            </div>
+          </div>
+    `
+  })
+  displayMenu = displayMenu.join("")
+  section.innerHTML = displayMenu
+};
+
+menuList(menu);
+console.log("Filter Section", filterSection(filterBtns))
+
+
+
+/* Function Section */
+
+function country(value){
+  return value == "All" ? menu: menu.filter(menus => menus.category === value)
 }
-
-console.log("Find Categorie Section",findCategorie());
-
-/* Functions Section */
-
-function isKorea(){
-  let fitlerCategorieKorea = menu.filter(menus => menus.category === "Korea")
-  return fitlerCategorieKorea
-}
-function isJapan(){
-  let fitlerCategorieJapan = menu.filter(menus => menus.category === "Japan")
-  return fitlerCategorieJapan
-}
-function isChina(){
-  let fitlerCategorieChina = menu.filter(menus => menus.category === "China")
-  return fitlerCategorieChina
-}
-function isAll(){
-  return menu
-}
-
-
-
-console.log(isKorea())
-console.log(isJapan())
-console.log(isChina())
-console.log(isAll())
-
-/* let fitlerCategorie = menu.filter(menus => menus.category === "Korea")
-console.log(fitlerCategorie) */
-
-/* let section_categorie =  menu.map(food =>{
-  if(food.category === "Korea"){
-    filterBtns.add
-    return "Korea"
-  }
-  if(food.category === "Japan"){
-    return "Japan"
-  }
-  if(food.category === "China"){
-    return "China"
-  }
-  return console.log("Bir hata var")
-})
-console.log(section_categorie) */
